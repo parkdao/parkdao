@@ -1,0 +1,41 @@
+[package]
+name = "parkdao"
+version = "0.0.2"
+authors = ["Evan Feenstra <evanfeenstra@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+near-sdk = "4.0.0-pre.5"
+near-sdk-sim = "4.0.0-pre.5"
+near-contract-standards = "4.0.0-pre.5"
+
+# remember to include a line for each contract
+non-fungible-token = { path = "./nft" }
+market = { path = "./market" }
+park-token = { path = "./park" }
+
+[dev-dependencies]
+tokio = { version = "1.10.0", features = ["full"] }
+workspaces = "0.1" 
+anyhow = "1.0"
+borsh = "0.9"
+maplit = "1.0"
+near-units = "0.1.0"
+serde_json = { version = "1.0", features = ["arbitrary_precision"] }
+
+[profile.release]
+codegen-units = 1
+# Tell `rustc` to optimize for small code size.
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = true
+
+[workspace]
+# remember to include a member for each contract
+members = [
+  "nft",
+  "market",
+  "park",
+]
